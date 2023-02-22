@@ -15,7 +15,15 @@ class CreatePresensiTable extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('siswa_id');
+            $table->unsignedBigInteger('pegawai_id');
+            $table->date('tanggal');
+            $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Alpa']);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
+
+            $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
+            $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade');
         });
     }
 
