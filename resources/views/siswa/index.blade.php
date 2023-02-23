@@ -2,42 +2,53 @@
 
 @section('content')
     <div class="container">
-        <h1>Data Siswa</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>NISN</th>
-                    <th>Tempat Lahir</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Alamat</th>
-                    <th>Telepon</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($siswa as $s)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $s->nama }}</td>
-                    <td>{{ $s->nisn }}</td>
-                    <td>{{ $s->tempat_lahir }}</td>
-                    <td>{{ $s->tanggal_lahir }}</td>
-                    <td>{{ $s->jenis_kelamin }}</td>
-                    <td>{{ $s->alamat }}</td>
-                    <td>{{ $s->telepon }}</td>
-                    <td>
-                        <a href="{{ route('siswa.show', $s->id) }}" class="btn btn-info btn-sm">Detail</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Daftar Siswa</div>
 
-    <!-- tambahkan baris ini -->
-    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NISN</th>
+                                    <th>Kelas</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Alamat</th>
+                                    <th>Telepon</th>
+                                    <th>Foto</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($siswa as $key => $data)
+                                    <tr>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $data->nama }}</td>
+                                        <td>{{ $data->nisn }}</td>
+                                        <td>{{ $data->kelas->nama }}</td>
+                                        <td>{{ $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                        <td>{{ $data->alamat }}</td>
+                                        <td>{{ $data->telepon }}</td>
+                                        <td><img src="{{ $data->foto ? asset('storage/'.$data->foto) : asset('images/default.png') }}" width="100"></td>
+                                        <td>
+                                            <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <form action="{{ route('siswa.destroy', $data->id) }}" method="post" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+

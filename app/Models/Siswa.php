@@ -9,6 +9,7 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $table = 'siswa';
+
     protected $fillable = [
         'nama',
         'nisn',
@@ -17,11 +18,11 @@ class Siswa extends Model
         'jenis_kelamin',
         'alamat',
         'telepon',
-        'foto',
+        'foto'
     ];
 
     public function presensi()
     {
-        return $this->hasMany(Presensi::class);
+        return $this->belongsTo(Kelas::class);
     }
 }

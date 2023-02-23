@@ -22,9 +22,11 @@ class CreateSiswaTable extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('alamat');
             $table->string('telepon', 20)->nullable();
-            $table->string('foto')->nullable();
+            $table->unsignedBigInteger('kelas_id');
             $table->timestamps();
-        });
+
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+                });
     }
 
     /**
