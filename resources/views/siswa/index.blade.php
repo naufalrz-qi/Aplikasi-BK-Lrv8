@@ -28,18 +28,14 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->nisn }}</td>
-                                        <td>{{ $data->kelas->nama }}</td>
+                                        <td>{{ $data->kelas_id }}</td>
                                         <td>{{ $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                         <td>{{ $data->alamat }}</td>
                                         <td>{{ $data->telepon }}</td>
                                         <td><img src="{{ $data->foto ? asset('storage/'.$data->foto) : asset('images/default.png') }}" width="100"></td>
                                         <td>
-                                            <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                            <form action="{{ route('siswa.destroy', $data->id) }}" method="post" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data?')">Hapus</button>
-                                            </form>
+                                            <a href="{{ route('siswa.show', $data->id) }}" class="btn btn-primary btn-sm">Detail</a>
+
                                         </td>
                                     </tr>
                                 @endforeach
