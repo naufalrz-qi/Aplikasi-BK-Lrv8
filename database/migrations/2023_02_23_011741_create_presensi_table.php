@@ -17,6 +17,7 @@ class CreatePresensiTable extends Migration
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->unsignedBigInteger('pegawai_id');
+            $table->unsignedBigInteger('mata_pelajaran_id');
             $table->date('tanggal');
             $table->enum('status_kehadiran', ['Hadir', 'Izin', 'Sakit', 'Alpa']);
             $table->text('keterangan')->nullable();
@@ -24,6 +25,7 @@ class CreatePresensiTable extends Migration
 
             $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade');
+            $table->foreign('mata_pelajaran_id')->references('id')->on('mata_pelajaran')->onDelete('cascade');
         });
     }
 

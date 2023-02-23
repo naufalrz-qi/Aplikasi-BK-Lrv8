@@ -24,6 +24,7 @@ class CreatePegawaiTable extends Migration
             $table->string('telepon', 20)->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
+
         });
     }
 
