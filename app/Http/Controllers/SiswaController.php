@@ -15,6 +15,9 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
+        $siswa = Siswa::join('kelas', 'siswa.kelas_id', '=', 'kelas.id')
+                ->select('siswa.*', 'kelas.nama as nama_kelas')
+                ->get();
         return view('siswa.index', compact('siswa'));
     }
 
@@ -45,9 +48,16 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Siswa $siswa)
+    public function show($id)
     {
-        return view('siswa.show', ['siswa' => $siswa]);
+
+        // return view('siswa.show', ['siswa' => $siswa]);
+        $siswa = Siswa::join('kelas', 'siswa.kelas_id', '=', 'kelas.id')
+        ->select('siswa.*', 'kelas.nama as nama_kelas')
+        ->where('siswa.id', $id)
+        ->firstOrFail();
+
+        return view('siswa.show', compact('siswa'));
     }
 
     /**

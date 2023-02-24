@@ -28,7 +28,7 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->nisn }}</td>
-                                        <td>{{ $data->kelas_id }}</td>
+                                        <td>{{ $data->nama_kelas }}</td>
                                         <td>{{ $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                         <td>{{ $data->alamat }}</td>
                                         <td>{{ $data->telepon }}</td>
